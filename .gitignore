@@ -1,0 +1,30 @@
+# Go build output
+/bin/
+/obj/
+
+# Go workspace file
+/go.work
+/go.work.sum
+
+# Dependency directories
+/vendor/
+
+# IDE or editor files
+*.idea/
+.vscode/
+
+# Go test binary
+*.test
+
+# Coverage file
+*.cov
+
+# Binary output from `go install`
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Log files
+*.log
