@@ -1,4 +1,4 @@
-package helpers
+package collections
 
 type HashSet[T comparable] map[T]struct{}
 
