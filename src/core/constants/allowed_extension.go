@@ -1,14 +1,24 @@
 package appconstants
 
+const (
+	M3U8 = "m3u8"
+	M3U  = "m3u"
+	WPL  = "wpl"
+	MP3  = "mp3"
+	FLAC = "flac"
+	M4A  = "mp4"
+)
+
 var allowedSong = map[string]bool{
-	"mp3":  true,
-	"flac": true,
+	MP3:  true,
+	FLAC: true,
+	M4A:  true,
 }
 
 var allowedPlaylist = map[string]bool{
-	"m3u8": true,
-	"m3u":  true,
-	"wpl":  true,
+	M3U8: true,
+	M3U:  true,
+	WPL:  true,
 }
 
 func AllowedSong() map[string]bool {

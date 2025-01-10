@@ -4,16 +4,15 @@ import (
 	"io/fs"
 	"path/filepath"
 	"strings"
-	"time"
 
+	clc "github.com/FranMT-S/Playlist-editor/src/core/collections"
 	appconstants "github.com/FranMT-S/Playlist-editor/src/core/constants"
-	hel "github.com/FranMT-S/Playlist-editor/src/core/helpers"
 )
 
-func GetSongs(path string) map[string]bool {
-	allowed := appconstants.AllowedSong()
-	set := make(map[string]bool)
-	var songs []string
+func GetPlaylist(path string) clc.HashSet[string] {
+	allowed := appconstants.AllowedPlaylist()
+	set := make(clc.HashSet[string])
+
 	f := func(path string, info fs.DirEntry, err error) error {
 		if !info.IsDir() {
 			parts := strings.Split(info.Name(), ".")
@@ -21,9 +20,7 @@ func GetSongs(path string) map[string]bool {
 			extension = strings.ToLower(extension)
 
 			if allowed[extension] {
-				path = strings.ToLower(path)
-				songs = append(songs, path)
-				set[path] = false
+				set.Add(strings.ToLower(path))
 			}
 		}
 
@@ -31,14 +28,12 @@ func GetSongs(path string) map[string]bool {
 	}
 
 	filepath.WalkDir(path, f)
-	now := time.Now()
-	name := "songs_" + now.Format("2006-01-02_15-04-05") + ".txt"
-	hel.NewLog(name, songs)
+
 	return set
 }
 
-// func GetSongs(set clc.HashSet[string]) fs.WalkDirFunc {
-// 	allowed := appconstants.AllowedSong()
+// func GetPlaylist(set clc.HashSet[string]) fs.WalkDirFunc {
+// 	allowed := appconstants.AllowedPlaylist()
 
 // 	f := func(path string, info fs.DirEntry, err error) error {
 // 		if !info.IsDir() {
